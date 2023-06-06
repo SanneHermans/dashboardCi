@@ -25,18 +25,22 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
+          image: mysql:latest
+          env:
+              MYSQL_DATABASE: robot4care
+              MYSQL_USER: robot
+              MYSQL_PASSWORD: robot
+              MYSQL_ROOT_PASSWORD: robot
+          ports:
+              - 3306
+          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
   
       - name: Set up database
         run: |
-          mysql -uroot -proot -hlocalhost -P3306 robot4care < ./robot4careDatabase.sql
+          mysql -u robot -probot -h localhost robot4care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal
         run: journalctl -xeu mysql.service

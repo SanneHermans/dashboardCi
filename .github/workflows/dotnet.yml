@@ -23,24 +23,33 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_DATABASE: robot4care
+      DB_USERNAME: root
+      DB_PASSWORD: root
     services:
       mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
+          image: mysql:latest
+          env:
+              MYSQL_DATABASE: robot4care
+              MYSQL_USER: robot
+              MYSQL_PASSWORD: robot
+              MYSQL_ROOT_PASSWORD: robot
+          ports:
+              - 3306
+          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
   
       - name: Set up database
         run: |
-          sudo /lib/systemd/systemd-sysv-install enable mysql
-          sudo systemctl enable mysql.service
-          sudo systemctl start mysql.service
-          sudo systemctl status mysql.service
-          mysql -u root -proot -h localhost -P 3306 robot4care < robot4careDatabase.sql
+          sudo systemctl start mysql
+          sudo mysql -uroot -proot -h 127.0.0.1 -e 'CREATE DATABASE Robot4Care;'
+          sudo mysql -uroot -proot -h 127.0.0.1 Robot4Care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal
         run: journalctl -xeu mysql.service

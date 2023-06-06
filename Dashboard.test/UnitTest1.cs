@@ -27,7 +27,7 @@ namespace Dashboard.test
             string connectionString = "Server=localhost;Port=3306;Database=Robot4Care;Uid=root;Pwd=root;";
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using MySqlCommand command = new MySqlCommand("TRUNCATE TABLE my_table;");
+                using MySqlCommand command = new MySqlCommand("TRUNCATE TABLE locations;");
                 conn.Open();
                 command.ExecuteScalar();
             }

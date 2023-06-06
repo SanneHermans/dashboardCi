@@ -40,6 +40,7 @@ jobs:
   
       - name: Set up database
         run: |
+          sudo systemctl start mysql
           sudo mysql -u robot -probot -h 127.0.0.1 robot4care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal

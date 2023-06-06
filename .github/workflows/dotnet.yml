@@ -19,7 +19,7 @@ jobs:
           dotnet-version: "7.0.x"
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release
 
   test:
     needs: build
@@ -29,11 +29,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Restore packages
-        run: dotnet restore
-
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release
 
       - name: Test
         run: dotnet test --no-restore --verbosity normal

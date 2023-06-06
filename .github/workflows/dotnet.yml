@@ -36,7 +36,8 @@ jobs:
   
       - name: Set up database
         run: |
-          sudo /etc/init.d/mysql start
+          sudo systemctl enable mysql.service
+          sudo systemctl start mysql.service
           mysql -u root -proot -h localhost -P 3306 robot4care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal

@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,10 +23,19 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
+      - name: Set up database
+        run: mysql -u root -p root -h localhost -P 3306 < Robot4CareDatabase.sql
 
       - name: Build
         run: dotnet build --configuration Release

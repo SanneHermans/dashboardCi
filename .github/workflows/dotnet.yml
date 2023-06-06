@@ -42,6 +42,9 @@ jobs:
           sudo systemctl status mysql.service
           mysql -u root -proot -h localhost -P 3306 robot4care < robot4careDatabase.sql
         
+      - name: Check MySQL service journal
+        run: journalctl -xeu mysql.service
+      
       - name: Start MySQL service
         run: sudo systemctl start mysql
         

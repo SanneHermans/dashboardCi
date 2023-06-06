@@ -33,9 +33,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+  
+      - name: Check MySQL service status
+        run: systemctl status mysql
+  
       - name: Set up database
-        run: mysql -u root -p root -h localhost -P 3306 < robot4careDatabase.sql
+        run: mysql -u root -p<password> -h localhost -P 3306 < robot4careDatabase.sql
 
       - name: Build
         run: dotnet build --configuration Release

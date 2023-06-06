@@ -3,6 +3,8 @@ using Robot4CareDashboard.DatabaseManagers;
 using Robot4CareDashboard.Logics;
 using Moq;
 using Robot4CareDashboard.Models;
+using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Dashboard.test
 {
@@ -22,6 +24,14 @@ namespace Dashboard.test
         public void Get_ShouldReturnListOfLocations()
         {
             // Arrange
+            string connectionString = "Server=localhost;Port=3306;Database=Robot4Care;Uid=root;Pwd=root;";
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                using MySqlCommand command = new MySqlCommand("TRUNCATE TABLE my_table;");
+                conn.Open();
+                command.ExecuteScalar();
+            }
+
             locationLogics.Create(11, 22, "Location1");
             locationLogics.Create(33, 44, "Location2");
 

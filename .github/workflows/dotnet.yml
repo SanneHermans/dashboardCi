@@ -23,6 +23,13 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_DATABASE: robot4care
+      DB_USERNAME: root
+      DB_PASSWORD: root
     services:
       mysql:
           image: mysql:latest
@@ -41,7 +48,7 @@ jobs:
       - name: Set up database
         run: |
           sudo systemctl start mysql
-          sudo mysql -uroot -probot -h 127.0.0.1 robot4care < ./robot4careDatabase.sql
+          sudo mysql -uroot -proot -h 127.0.0.1 robot4care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal
         run: journalctl -xeu mysql.service

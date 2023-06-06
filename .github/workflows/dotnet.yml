@@ -36,13 +36,12 @@ jobs:
         
       - name: Start MySQL service
         run: sudo systemctl start mysql
-
-  
-      - name: Check MySQL service status
-        run: systemctl status mysql
   
       - name: Set up database
-        run: mysql -u root -p<password> -h localhost -P 3306 < robot4careDatabase.sql
+        run: mysql -u root -p<password> -h 127.0.0.1 -P 3306 < robot4careDatabase.sql
+        
+      - name: Check MySQL service status
+        run: systemctl status mysql
 
       - name: Build
         run: dotnet build --configuration Release

@@ -33,12 +33,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Start MySQL service
-        run: sudo systemctl start mysql
   
       - name: Set up database
         run: mysql -u root -p<password> -h 127.0.0.1 -P 3306 < robot4careDatabase.sql
+        
+      - name: Start MySQL service
+        run: sudo systemctl start mysql
         
       - name: Check MySQL service status
         run: systemctl status mysql

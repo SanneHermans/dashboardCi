@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+@model DashboardModel
+
+<div class="text-center">
+    <h1 class="display-4">Dashboard</h1>
+    Locations <a asp-controller="Locations" asp-action="Index" class="btn btn-primary">+</a>
+    @if (Model.emergency.Emergency == true)
+    {
+        <form method="post">
+            <button name="emergency" value="false" asp-controller="Dashboard" asp-action="Update" class="btn btn-success">Deactivate emergency</button>
+        </form>
+    }
+    else
+    {
+        <form method="post">
+            <button name="emergency" value="true" asp-controller="Dashboard" asp-action="Update" class="btn btn-danger">Activate emergency</button>
+        </form>
+    }
+    location James : @Model.james.CurrentLocation.X , @Model.james.CurrentLocation.Y
+</div>
+

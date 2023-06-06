@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:name=\"constr\"connectionString=\"DataSource=localhost;port=3306;InitialCatalog=SampleDB;UserId=root;password=\""
+    }
+  }
+}

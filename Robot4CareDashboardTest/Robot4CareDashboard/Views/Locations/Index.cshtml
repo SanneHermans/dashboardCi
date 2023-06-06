@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Locations";
+}
+@model IEnumerable<LocationModel>
+
+<div class="text-center">
+    <h1 class="display-4">Data</h1>
+    <table cellpadding="1" cellspacing="1">
+        <tr>
+            <th>Id</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (LocationModel location in Model)
+        {
+            <tr>
+                <td>@location.Id</td>
+                <td>@location.X</td>
+                <td>@location.Y</td>
+                <td>@location.Name</td>
+                <td>
+                    <form method="post"><button type="submit" name="Id" value="@location.Id" class="btn btn-danger" asp-controller="Locations" asp-action="Delete" onclick="return confirm('Are you sure you want to delete this location, this can not be undone!');">Delete</button></form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <form method="post">
+        <div class="form-group">
+            <label class="float-left" for="X">X</label>
+            <input type="number" class="form-control" id="X" name="X" placeholder="X...">
+        </div>
+        <div class="form-group">
+            <label class="float-left" for="Y">Y</label>
+            <input type="number" class="form-control" id="Y" name="Y" placeholder="Y...">
+        </div>
+        <div class="form-group">
+            <label class="float-left" for="Name">Name</label>
+            <input type="text" class="form-control" id="Name" name="Name" placeholder="Name...">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create location</button>
+        </div>
+    </form>
+    
+</div>

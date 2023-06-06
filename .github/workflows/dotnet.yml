@@ -36,6 +36,9 @@ jobs:
   
       - name: Set up database
         run: |
+          sudo apt-get remove --purge mysql*
+          sudo apt-get autoremove
+          sudo apt-get autoclean
           sudo apt-get install mysql-server mysql-client
           mysql -u root -proot -h localhost -P 3306 robot4care < ./robot4careDatabase.sql
         

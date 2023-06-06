@@ -48,8 +48,8 @@ jobs:
       - name: Set up database
         run: |
           sudo systemctl start mysql
-          sudo mysql -uroot -proot -h 127.0.0.1 -e 'CREATE DATABASE robot4care;'
-          sudo mysql -uroot -proot -h 127.0.0.1 robot4care < ./robot4careDatabase.sql
+          sudo mysql -uroot -proot -h 127.0.0.1 -e 'CREATE DATABASE Robot4Care;'
+          sudo mysql -uroot -proot -h 127.0.0.1 Robot4Care < ./robot4careDatabase.sql
         
       - name: Check MySQL service journal
         run: journalctl -xeu mysql.service
